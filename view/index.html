@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>许愿墙案例</title>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/style.css" charset="UTF-8">
+  <style>
+    .footer{
+      width: 100%;
+      height: 70px;
+      padding-top: 18px;
+      /* background: rgb(231, 227, 227); */
+      bottom: 0;
+      position: fixed;
+      border-top-style: solid;
+      border-width: thin;
+      border-color: #e5e5e5;
+      text-shadow: transparent 0px 0px 0px, rgb(0 0 0 / 70%) 0px 0px 0px !important;
+    }
+    .footer p{
+      color: #2FAE36;
+      margin: 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="container01"><h1><a href="">许愿墙</a></h1></div>
+  </div>
+  <!-- 愿望单主体 -->
+  <div class="container mt-5 text-center">
+    <button class="btn btn-success mb-3" onclick="openEditadd('addModal')">我要许愿</button>
+    <div class="row text-left" id="wish_card">
+    </div>
+    <p class="text-center mt-4">当前位于:<span class="pageNum">1</span> / <spanc class="total">4</spanc></p>
+    <div class="row mt-2">
+        <div class="col-lg-4 col-md-12 col-sm-12">
+
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <nav class="page">
+                <button class="page-link" onclick="firstPage()">首页</button>
+                <button class="page-link" onclick="prevPage()">上一页</button>
+                <button class="page-link" onclick="nextPage()">下一页</button>
+                <button class="page-link" onclick="lastPage()">尾页</button>
+            </nav>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12">
+
+        </div>
+    </div>
+  </div>
+
+  <!-- 添加愿望 -->
+  <!-- 验证密码 -->
+  <div class="modal fade" id="validationModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="validationModalLabel">验证密码</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">密码</span>
+                    </div>
+                    <input type="text" placeholder="6个字符以内.." autocomplete="off" id="pwd" value="" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="editWish()">验证</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- 编辑愿望 -->
+  <div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalModalLabel">修改您的愿望清单</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="EditNameFormControlInput1">我的名字:</label>
+                        <input type="text" class="form-control" autocomplete="off" placeholder="名字" id="EditNameFormControlInput1">
+                    </div>
+                    <div class="form-group">
+                        <label for="EditColorFormControlInput1">贴纸颜色:</label>
+                        <input type="color" class="form-control color_input" value=""  id="EditColorFormControlInput1">
+                    </div>
+                    <div class="form-group">
+                        <label for="EditContentFormControlTextarea1">我的愿望:</label>
+                        <textarea class="form-control"  id="EditContentFormControlTextarea1" placeholder="80个字符以内(中文占两个字符)" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="editUpload()">提交</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- 删除愿望 -->
+  <!--- 删除愿望单对话框 -->
+  <div class="modal fade" id="delModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delModalModalLabel">删除愿望清单</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <p>是否确定删除对话框?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="delWish()">确定</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer">
+     <p>Designed by Li Qi</p>
+     <p>©2022</p>
+    </div>
+  </footer>
+</body>
+<script src="../js/index.js"></script>
+</html>

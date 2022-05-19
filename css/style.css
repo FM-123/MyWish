@@ -1,0 +1,50 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.top{height:50px;border-bottom:1px solid #ebebeb;background:#fff;}
+.top h1{margin:0;font-weight:400;font-size:1.8em;font-family:'Microsoft YaHei';line-height:50px;}
+.top h1 a{color:#2FAE36;text-decoration:none;}
+.container01{margin:0 auto;width:80%;}
+.wish_card{
+  min-height: 250px !important;
+}
+.edit_btn{
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+}
+.edit_btn button{
+  border: none;
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+}
+.page{
+  display: flex;
+  justify-content: space-between;
+}
+.alert-warning,
+.alert-danger,
+.alert-success{
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  z-index: 9999999;
+  top: 15px;
+}
+.card{
+  color: #000;
+  font-size: 20px;
+}
+.color_input{
+  width: 50px;
+}
+.border-bottom{
+  border-color: #000 !important;
+}
+.wishContent{
+  min-height: 80px;
+}

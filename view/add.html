@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/jquery.min.js"></script>
+  <title>Document</title>
+  <style>
+body{margin:0;background:#F7F7F7;}
+.top{height:50px;border-bottom:1px solid #ebebeb;background:#fff;}
+.top h1{margin:0;font-weight:400;font-size:1.8em;font-family:'Microsoft YaHei';line-height:50px;}
+.top h1 a{color:#2FAE36;text-decoration:none;}
+.container{margin:0 auto;width:80%;}
+.note{margin-top:20px;padding:0 10px;padding-bottom:30px;border:1px solid #eee;background:#fff;color:#666;font-size:12px;font-family:arial,simsun;}
+.note:after{clear:both;display:block;content:"";}
+.note-top{margin:20px auto;margin-bottom:10px;text-align:center;}
+.note-top-add{display:inline-block;padding:6px 18px;border-radius:2px;background-color:#6acd6a;color:#fff;cursor:pointer;transition:background-color .5s;}
+.note-top-add:hover{background-color:#2FAE36;}
+.note-top-add:active{background-color:#1F9E26;}
+.note-box{display:flex;flex-wrap:wrap;justify-content:center;}
+.note-list{position:relative;box-sizing:border-box;margin:10px;padding:10px;width:160px;height:175px;box-shadow:2px 2px 0 #DDD;}
+.note-list-red{border:1px solid #FDC4F2;background-color:#FFD6F4;}
+.note-list-blue{border:1px solid #A6E3FC;background-color:#C6F3FC;}
+.note-list-yellow{border:1px solid #EDEB7C;background-color:#FFFCBC;}
+.note-list-green{border:1px solid #A5F88B;background-color:#D5F8BB;}
+.note-list:hover .note-list-action{display:block;}
+.note-list-action{position:absolute;top:5px;right:8px;display:none;}
+.note-list-edit{position:relative;top:-2px;float:left;margin-right:5px;color:#666;text-decoration:none;font-size:16px;}
+.note-list-edit:hover{color:#EB1C27;}
+.note-list-delete{float:left;color:#666;text-decoration:none;font-size:18px;}
+.note-list-delete:hover{color:#EB1C27;}
+.note-list-box{margin:0;margin-top:10px;padding:0;list-style:none;font-size:13px;line-height:20px;}
+.note-list-name{margin-bottom:5px;padding-bottom:5px;border-bottom:1px dotted #fff;font-size:12px;}
+.note-list-name span{font-weight:700;font-size:13px;}
+.note-list-date{padding-top:5px;font-size:12px;}
+.note-list-content{word-break:break-all;}
+.note-layer{position:fixed;top:0;right:0;bottom:0;left:0;display:flex;background-color:rgba(150,150,150,.2);align-items:center;justify-content:center;}
+.note-edit{padding:15px;width:400px;border:10px solid rgba(106,205,106,.3);border-radius:5px;background-color:#fff;background-clip:padding-box;}
+.note-edit-title{margin-bottom:8px;border:0;color:#299C30;font-weight:700;}
+.note-edit-table{width:100%;border:0;border-collapse:collapse;}
+.note-edit-table-w{width:210px;}
+.note-edit-table td{padding-bottom:5px;}
+.note-edit p{margin:0;margin-bottom:5px;}
+.note-edit-content{box-sizing:border-box;margin-bottom:5px;padding:3px;width:100%;height:80px;border:1px solid #ccc;color:#666;font-size:12px;font-family:arial,simsun;}
+.note-edit-pwd{padding:3px;width:115px;border:1px solid #ccc;color:#666;font-size:12px;font-family:arial,simsun;}
+.note-edit-name{padding:3px;width:180px;border:1px solid #ccc;color:#666;font-size:12px;font-family:arial,simsun;}
+.note-edit-submit{padding:4px 10px;border:1px solid #2cb82c;border-radius:2px;background-color:#6acd6a;color:#fff;letter-spacing:2px;font-size:12px;cursor:pointer;transition:background-color .5s;}
+.note-edit-submit:hover{background-color:#2FAE36;}
+.note-edit-submit:active{background-color:#1F9E26;}
+.note-edit-cancel{margin-left:5px;padding:4px 10px;border:1px solid #2cb82c;border-radius:2px;background-color:#6acd6a;color:#fff;letter-spacing:2px;font-size:12px;cursor:pointer;transition:background-color .5s;}
+.note-edit-cancel:hover{background-color:#2FAE36;}
+.note-edit-cancel:active{background-color:#1F9E26;}
+.note-edit-red input{display:none;}
+.note-edit-red{display:inline-block;width:20px;height:20px;border:1px solid #FDB4E2;background-color:#FDC4F2;cursor:pointer;}
+.note-edit-red:hover{border:1px solid #CD74A2;}
+.note-edit-red-curr{border:1px solid #CD74A2;}
+.note-edit-blue input{display:none;}
+.note-edit-blue{display:inline-block;width:20px;height:20px;border:1px solid #A6E3FC;background-color:#A6E3FC;cursor:pointer;}
+.note-edit-blue:hover{border:1px solid #55A5B7;}
+.note-edit-blue-curr{border:1px solid #55A5B7;}
+.note-edit-yellow input{display:none;}
+.note-edit-yellow{display:inline-block;width:20px;height:20px;border:1px solid #FDFB8C;background-color:#FDFB8C;cursor:pointer;}
+.note-edit-yellow:hover{border:1px solid #BEBC45;}
+.note-edit-yellow-curr{border:1px solid #BEBC45;}
+.note-edit-green input{display:none;}
+.note-edit-green{display:inline-block;width:20px;height:20px;border:1px solid #A5F88B;background-color:#A5F88B;cursor:pointer;}
+.note-edit-green:hover{border:1px solid #78C755;}
+.note-edit-green-curr{border:1px solid #78C755;}
+  </style>
+</head>
+<body>
+  <div class="note-layer js-note-add">
+    <div class="note-edit">
+      <div class="note-edit-title">我要许愿</div>
+      <form>
+        <table class="note-edit-table">
+          <tr>
+            <td class="note-edit-table-w">
+              <p>我的名字：</p>
+              <input class="note-edit-name" type="text" name="name" placeholder="匿名">
+            </td>
+            <td>
+              <p>贴纸颜色：</p>
+              <input type="color" class="form-control color_input"  value="#36AABA" id="ColorForm">
+              <!-- <label class="note-edit-green"><input type="radio" name="color" value="green" checked></label>
+              <label class="note-edit-blue"><input type="radio" name="color" value="blue"></label>
+              <label class="note-edit-yellow"><input type="radio" name="color" value="yellow"></label>
+              <label class="note-edit-red"><input type="radio" name="color" value="red"></label> -->
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <p>我的愿望：</p>
+              <textarea class="note-edit-content" name="content" placeholder="80个字符以内（中文占2个字符位）"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              保护密码：
+              <input class="note-edit-pwd" type="password" name="password" placeholder="6个字符以内">
+            </td>
+            <td>
+              <input class="note-edit-submit" type="button" value="提交" onclick="editUpload()">
+              <input class="note-edit-cancel" type="button" value="取消" onclick="backtrack()">
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+</body>
+<script>
+  function editUpload(){
+    let name = document.querySelector('.note-edit-name').value;
+    let content = document.querySelector('.note-edit-content').value;
+    let password = document.querySelector('.note-edit-pwd').value;
+    let color = $('#ColorForm').val();
+    let time = new Date().getTime();
+    $.ajax({
+        type: "POST",
+        url: '../controller/save.php',
+        data: ({
+            func: 'addWish',
+            name: name,
+            color: color,
+            // content: content,
+            content: content.replace('<script>',"*"),
+            password: password,
+            time: time
+        }),
+        success: function (res) {
+          if (parseInt(res) === 1) {
+            alert('感谢您的愿望！');
+            window.location.href = './index.html';
+            console.log(time);
+        }
+    }
+    });
+    console.log(time);
+  }
+  function backtrack(){
+    window.location.href = './index.html';
+  }
+</script>
+
+</html>
